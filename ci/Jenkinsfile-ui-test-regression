@@ -3,7 +3,6 @@ def DAYS_TO_KEEP = '10'
 def BUILDS_TO_KEEP = '10'
 def DOCKER_IMAGE = 'kaniamu/uiautomationbrowsers:latest'
 // def DOCKER_LABEL_DIND = 'dind'
-user
 def ENV_JENKINS = 'true'
 def JENKINSFILE_COMMON = './ci/Jenkinsfile-common'
 def common = null
