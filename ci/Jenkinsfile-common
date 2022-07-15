@@ -19,6 +19,8 @@ def npmInstall() {
         npmConfig()
         npmInstallGlobals()
         npmInstallLocals()
+        sh 'node -v'
+        sh 'java --version'
      } catch (ex) {
         clearRegistry()
         npmInstallGlobals()
