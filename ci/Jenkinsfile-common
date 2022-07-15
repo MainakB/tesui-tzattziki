@@ -131,7 +131,7 @@ def always(currentBuild, platform, gitBranch, buildUrl) {
 // }
 
 def archiveLogs() {
-    archiveArtifacts artifacts: 'Reports/, _results_', allowEmptyArchive: true
+    archiveArtifacts artifacts: 'Reports/, _results_/', allowEmptyArchive: true
 //Uncomment below line to save baseline images in artifact, comment above line when this is active and vice versa.
 //archiveArtifacts artifacts: 'Reports/baseImages/*.png', allowEmptyArchive: true
 //archiveArtifacts artifacts: 'Reports/*.pdf', allowEmptyArchive: true
