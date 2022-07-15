@@ -3,11 +3,10 @@ def DAYS_TO_KEEP = '10'
 def BUILDS_TO_KEEP = '10'
 def DOCKER_IMAGE = 'kaniamu/uiautomationbrowsers:latest'
 // def DOCKER_LABEL_DIND = 'dind'
-
+user
 def ENV_JENKINS = 'true'
 def JENKINSFILE_COMMON = './ci/Jenkinsfile-common'
 def common = null
-
 
 def getCreds() {
     def cred
@@ -36,6 +35,7 @@ pipeline {
     environment {
         JENKINS_CI = "${ENV_JENKINS}"
         BROWSERNAME = "${env.browser}"
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
     }
 
     stages {
@@ -43,7 +43,7 @@ pipeline {
             agent {
                 docker {
                     image DOCKER_IMAGE
-                    // label DOCKER_LABEL_DIND
+                // label DOCKER_LABEL_DIND
                 }
             }
 
