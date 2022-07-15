@@ -1,9 +1,4 @@
-ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
-
-
-
-
-
+// ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
 
 def setBuildDesc(currentBuild, platform, gitBranch) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
@@ -12,18 +7,6 @@ def setBuildDesc(currentBuild, platform, gitBranch) {
         currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch.split('/')[1]},\nOS -> ${op_system}"
      } else {
         currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch},\nOS -> ${op_system}"
-    }
-}
-
-def setBuildDescWithApmVersion(currentBuild, platform, gitBranch) {
-    def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
-    def platformValue = platform ?  platform : 'Multi Tenant'
-
-
-    if (gitBranch.contains('/')) {
-        currentBuild.description = "Tenant -> ${platformValue}\nBranch -> ${gitBranch.split('/')[1]}nOS -> ${op_system}"
-    } else {
-        currentBuild.description = "Tenant -> ${platformValue}\nBranch -> ${gitBranch}\nOS -> ${op_system}"
     }
 }
 
@@ -44,7 +27,7 @@ def npmInstall() {
 }
 
 def npmConfig() {
-    sh 'npm config set strict-ssl false' 
+    sh 'npm config set strict-ssl false'
 }
 
 def npmInstallGlobals() {
@@ -56,24 +39,15 @@ def npmInstallLocals() {
 }
 
 def clearRegistry() {
-    if (isWindows()) {
-        bat 'npm config delete registry'
-     } else {
-        sh 'npm config delete registry'
-    }
+    sh 'npm config delete registry'
 }
 
- /*
-  *  stage: test
-  *sh "grunt test --suites=${suite} --testModuleName=industries --env=${env} --database=${database} --browsername=${browser} --tags=${tag}"
-  */
-def test(jobParams) {
-    def suites = jobParams.suites ! = null ? jobParams.suites.trim() : jobParams.suites
+def test() {
+    def suites = jobParams.suites != null ? jobParams.suites.trim() : jobParams.suites
     def customer = jobParams.customer != null ? jobParams.customer.trim() : jobParams.customer
     def browser = jobParams.browser != null ? jobParams.browser.trim() : jobParams.browser
 
     sh "grunt test --suites=${suites} --customer=${customer} --browser=${browser}"
-
 }
 
  /*
@@ -108,7 +82,7 @@ def notifySuccess(emailSuccess) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build passed validation for tenant - ${env.platform}",
-        //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) passed validation (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailSuccess
      )
@@ -118,7 +92,7 @@ def notifyBackToNormal(emailBackToNormal) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build passed validation after previously failing for tenant - ${env.platform}",
-        //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) passed validation after previously failing (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailBackToNormal
      )
@@ -128,7 +102,7 @@ def notifyFailure(emailFailure) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build failed validation for tenant - ${env.platform}",
-        //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) failed validation (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailFailure
      )
@@ -138,7 +112,6 @@ def notifyFailure(emailFailure) {
   *  post: always
   */
 def always(currentBuild, platform, gitBranch, buildUrl) {
-    setBuildDescWithApmVersion(currentBuild, platform, gitBranch)
     // reportResults()
     archiveLogs()
 }
@@ -175,14 +148,13 @@ def postTestSuccessWrapper() {
     if (isBackToNormal(currentBuild)) {
         backToNormal("${env.emailOnSuccess}")
      } else {
-    // sh 'node node_modules/@internal-tools/someuinext/Core/CdnFilePathMerger.js'
+        // sh 'node node_modules/@internal-tools/someuinext/Core/CdnFilePathMerger.js'
         success("${env.emailOnSuccess}")
     }
 }
 
 def postTestFailureWrapper() {
-
-        // sh 'node node_modules/@internal-tools/someuinext/Core/CdnFilePathMerger.js'
+    // sh 'node node_modules/@internal-tools/someuinext/Core/CdnFilePathMerger.js'
     failure("${env.emailOnFailure}")
 }
 
@@ -190,7 +162,6 @@ def testStageWrapper() {
     def exceptionThrown = false
     try {
         test(env)
-        exceptionThrown = false
      } catch (err) {
         exceptionThrown = true
         if (env.stageRetryCounter && (env.stageRetryCounter as Integer) > 0) {

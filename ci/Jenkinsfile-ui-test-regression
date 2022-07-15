@@ -2,7 +2,7 @@
 def DAYS_TO_KEEP = '10'
 def BUILDS_TO_KEEP = '10'
 def DOCKER_IMAGE = 'kaniamu/uiautomationbrowsers:latest'
-def DOCKER_LABEL_DIND = 'dind'
+// def DOCKER_LABEL_DIND = 'dind'
 
 def ENV_JENKINS = 'true'
 def JENKINSFILE_COMMON = './ci/Jenkinsfile-common'
@@ -43,7 +43,7 @@ pipeline {
             agent {
                 docker {
                     image DOCKER_IMAGE
-                    label DOCKER_LABEL_DIND
+                    // label DOCKER_LABEL_DIND
                 }
             }
 
