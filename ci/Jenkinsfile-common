@@ -33,11 +33,11 @@ def npmConfig() {
 }
 
 def npmInstallGlobals() {
-    sh 'npm install grunt-cli -g'
+    sh 'npm install --global grunt-cli yarn'
 }
 
 def npmInstallLocals() {
-    sh 'npm install'
+    sh 'yarn install'
 }
 
 def clearRegistry() {
