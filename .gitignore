@@ -1,0 +1,8 @@
+node_modules
+dist
+Gruntfile_copy_2.js
+Gruntfile_copy.js
+Reports
+_results_
+.vscode
+.DS_Store
