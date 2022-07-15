@@ -37,7 +37,7 @@ def npmInstallGlobals() {
 }
 
 def npmInstallLocals() {
-    sh 'yarn install'
+    sh 'npm install'
 }
 
 def clearRegistry() {
