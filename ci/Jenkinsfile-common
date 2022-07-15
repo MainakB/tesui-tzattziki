@@ -42,7 +42,7 @@ def clearRegistry() {
     sh 'npm config delete registry'
 }
 
-def test() {
+def test(jobParams) {
     def suites = jobParams.suites != null ? jobParams.suites.trim() : jobParams.suites
     def customer = jobParams.customer != null ? jobParams.customer.trim() : jobParams.customer
     def browser = jobParams.browser != null ? jobParams.browser.trim() : jobParams.browser
