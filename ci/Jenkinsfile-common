@@ -114,7 +114,7 @@ def notifyFailure(emailFailure) {
   *  post: always
   */
 def always(currentBuild, platform, gitBranch, buildUrl) {
-    // reportResults()
+    reportResults()
     archiveLogs()
 }
 
