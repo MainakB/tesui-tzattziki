@@ -1,4 +1,4 @@
-// ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
+ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
 
 def setBuildDesc(currentBuild, platform, gitBranch) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
@@ -84,7 +84,7 @@ def notifySuccess(emailSuccess) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build passed validation for tenant - ${env.platform}",
-         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+          attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) passed validation (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailSuccess
      )
@@ -94,7 +94,7 @@ def notifyBackToNormal(emailBackToNormal) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build passed validation after previously failing for tenant - ${env.platform}",
-         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+          attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) passed validation after previously failing (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailBackToNormal
      )
@@ -104,7 +104,7 @@ def notifyFailure(emailFailure) {
     def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     emailext (
          subject: "${op_system} build failed validation for tenant - ${env.platform}",
-         //  attachmentsPattern: ATTACHMENTS_PATTERNS,
+          attachmentsPattern: ATTACHMENTS_PATTERNS,
          body: "Build(${op_system}) failed validation (${env.JOB_NAME} [${env.BUILD_NUMBER}]). Check console output at ${env.BUILD_URL}console",
          to: emailFailure
      )
@@ -118,17 +118,17 @@ def always(currentBuild, platform, gitBranch, buildUrl) {
     archiveLogs()
 }
 
-// def reportResults() {
-//     System.setProperty('hudson.model.DirectoryBrowserSupport.CSP', '')
-//     publishHTML (target: [
-//        allowMissing: false,
-//        alwaysLinkToLastBuild: false,
-//        keepAll: true,
-//        reportDir: 'Reports/report',
-//        reportFiles: 'index.html',
-//        reportName: 'Cucumber Report'
-//      ])
-// }
+def reportResults() {
+    System.setProperty('hudson.model.DirectoryBrowserSupport.CSP', '')
+    publishHTML (target: [
+       allowMissing: false,
+       alwaysLinkToLastBuild: false,
+       keepAll: true,
+       reportDir: 'Reports/report',
+       reportFiles: 'index.html',
+       reportName: 'Cucumber Report'
+     ])
+}
 
 def archiveLogs() {
     archiveArtifacts artifacts: 'Reports/, _results_/', allowEmptyArchive: true
