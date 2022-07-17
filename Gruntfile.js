@@ -2,7 +2,7 @@
 // require("dotenv").config();
 let fs = require("fs");
 let path = require("path");
-let { Tzatziki } = require("tzatziki-core");
+let { Tzatziki } = require("@kaniamb/tzatziki-core");
 
 module.exports = function (grunt) {
   require("jit-grunt")(grunt, {
@@ -50,10 +50,7 @@ module.exports = function (grunt) {
     try {
       var done = this.async();
       return Tzatziki.TestRunner.initConfigs({
-        testType: "wdio",
-        browser: grunt.option("browser"),
-        suites: grunt.option("suites"),
-        customer: grunt.option("customer"),
+        gruntobj: { ...grunt },
       }).then(
         () => {
           grunt.log.ok("Test runner config setup complete!");

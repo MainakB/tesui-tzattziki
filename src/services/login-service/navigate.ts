@@ -1,4 +1,4 @@
-import { Tzatziki } from "tzatziki-core";
+import { Tzatziki } from "@kaniamb/tzatziki-core";
 
 /**
  * main page object containing all methods, selectors and functionality

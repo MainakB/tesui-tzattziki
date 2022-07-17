@@ -1,4 +1,4 @@
-import { Tzatziki } from "tzatziki-core";
+import { Tzatziki } from "@kaniamb/tzatziki-core";
 
 import Page from "./navigate";
 

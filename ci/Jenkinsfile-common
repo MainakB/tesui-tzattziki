@@ -48,8 +48,9 @@ def test(jobParams) {
     def suites = jobParams.suites != null ? jobParams.suites.trim() : jobParams.suites
     def customer = jobParams.customer != null ? jobParams.customer.trim() : jobParams.customer
     def browser = jobParams.browser != null ? jobParams.browser.trim() : jobParams.browser
+    def tags = jobParams.tags != null ? jobParams.tags.trim() : jobParams.tags
 
-    sh "grunt test --suites=${suites} --customer=${customer} --browser=${browser}"
+    sh "grunt test --suites=${suites} --customer=${customer} --browser=${browser} --tags=${tags}"
 }
 
  /*

@@ -3,9 +3,9 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import LoginPage from "../login.page";
 // import SecurePage from "../../../sevices/secure-service/secure.page";
 
-const pages = {
-  login: LoginPage,
-};
+// const pages = {
+//   login: LoginPage,
+// };
 
 Given(
   /^I am on the (\w+) page "(.*)"$/,
