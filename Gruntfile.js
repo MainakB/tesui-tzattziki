@@ -1,5 +1,5 @@
 "use strict";
-// require("dotenv").config();
+
 const fs = require("fs");
 const path = require("path");
 const { Tzatziki } = require("@kaniamb/tzatziki-core");
@@ -7,20 +7,17 @@ const { Tzatziki_Bl } = require("@kaniamb/tzatziki-bl");
 
 module.exports = function (grunt) {
   require("jit-grunt")(grunt, {
+    shell: "grunt-shell-spawn",
     continue: "grunt-continue",
   });
 
-  // grunt.initConfig({
-  // shell: {
-  //   test: {
-  //     command: `npx ${wdiorun} ./node_modules/tziki/wdio.conf.ts`,
-  //   },
-  // },
-  // });
-
-  // grunt.loadNpmTasks("grunt-shell-spawn");
+  grunt.initConfig({
+    pkg: grunt.file.readJSON("package.json"),
+    shell: shellConfig(grunt),
+  });
 
   grunt.registerTask("pretest", [
+    "shell:compile",
     "task:setupConfigs",
     // "shell:compile",
     // "task_setUp:updateProxyForRallyIntegration",
@@ -38,7 +35,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask("test", [
     "pretest",
+    "continue:on",
     "task:startTest",
+    "shell:clean_build",
+    "continue:fail-on-warning",
     // "task_merge_jsons",
     // // 'concat',
     // "task_merge_logs",
@@ -84,45 +84,24 @@ module.exports = function (grunt) {
           return done(false);
         }
       );
-
-      // spec: ["src/customers/generic/features/**/*.feature"],
-      // cucumberOpts: {
-      //   // <string[]> (file/dir) require files before executing features
-      //   require: ["src/services/login-service/step-definitions/**/*.ts"],
-      // },
-      // grunt.task.run("shell:test");
-      // var wdio = new Launcher(
-      //   path.join(__dirname, "node_modules/tziki/wdio.conf.ts"),
-      //   {
-      //     spec:
-      //       // [
-      //       [
-      //         "src/customers/generic/features/login.feature",
-      //         // "features/login.featuire",
-      //       ],
-      //     // ["features/login.featuire"],
-      //     // ],
-      //     // Object.values(testSuite),
-      //     // ["src/customers/generic/features/**/*.feature"],
-      //     cucumberOpts: {
-      //       // <string[]> (file/dir) require files before executing features
-      //       require: ["src/services/**/step-definitions/**/*.ts"],
-      //     },
-      //   }
-      // );
-      // console.log("nextxs is");
-      // return wdio.run().then(
-      //   function (code) {
-      //     grunt.log.debug(`wdio testrunner finished with exit code ${code}`);
-      //     return done(code === 0);
-      //   },
-      //   function (error) {
-      //     grunt.log.error(`Something went wrong: ${e}`);
-      //     return done(false);
-      //   }
-      // );
     } catch (err) {
       grunt.verbose.or.write("Doing something").error().error(err.message);
     }
   });
 };
+
+function shellConfig(grunt) {
+  return {
+    options: {
+      stdout: true,
+      stderr: true,
+      failOnError: true,
+    },
+    compile: {
+      command: "npm run compile",
+    },
+    clean_build: {
+      command: "npm run clean:build",
+    },
+  };
+}

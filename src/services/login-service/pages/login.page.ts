@@ -1,6 +1,6 @@
-import { Tzatziki } from "@kaniamb/tzatziki-core";
+import {Tzatziki} from '@kaniamb/tzatziki-core';
 
-import Page from "./navigate";
+import Page from './navigate';
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -8,17 +8,17 @@ import Page from "./navigate";
 class LoginPage extends Page {
   public async login(username: string, password: string) {
     await Tzatziki.Action.enterText({
-      pageObject: "user",
+      pageObject: 'user',
       inputText: username,
-      replaceText: "username",
+      replaceText: 'username',
       //   browser.capabilities.browserName === "chrome" ? "abc" : "username",
     });
     await Tzatziki.Action.enterText({
-      pageObject: "password",
+      pageObject: 'password',
       inputText: password,
     });
     await Tzatziki.Action.click({
-      pageObject: "submit",
+      pageObject: 'submit',
     });
   }
 

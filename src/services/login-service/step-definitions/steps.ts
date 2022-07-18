@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 
-import LoginPage from "../login.page";
+import LoginPage from "../pages/login.page";
 // import SecurePage from "../../../sevices/secure-service/secure.page";
 
 // const pages = {
@@ -8,17 +8,17 @@ import LoginPage from "../login.page";
 // };
 
 Given(
-  /^I am on the (\w+) page abc"(.*)"$/,
+  /^I am on the (\w+) page "(.*)"$/,
   async (_page: string, path: string) => {
     await LoginPage.open(path);
   }
 );
 
-When(/^I login wuith (\w+) and (.+) efg$/, async (username, password) => {
+When(/^I login with (\w+) and (.+)$/, async (username, password) => {
   await LoginPage.login(username, password);
 });
 
-Then(/^I should nit see a flash message saying (.*)$/, async (_message) => {
+Then(/^I should see a flash message saying (.*)$/, async (_message) => {
   // await expect(SecurePage.flashAlert).toBeExisting();
   // await expect(SecurePage.flashAlert).toHaveTextContaining(message);
 });
