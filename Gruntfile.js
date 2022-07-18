@@ -1,8 +1,9 @@
 "use strict";
 // require("dotenv").config();
-let fs = require("fs");
-let path = require("path");
-let { Tzatziki } = require("@kaniamb/tzatziki-core");
+const fs = require("fs");
+const path = require("path");
+const { Tzatziki } = require("@kaniamb/tzatziki-core");
+const { Tzatziki_Bl } = require("@kaniamb/tzatziki-bl");
 
 module.exports = function (grunt) {
   require("jit-grunt")(grunt, {
@@ -53,6 +54,7 @@ module.exports = function (grunt) {
         gruntobj: { ...grunt },
       }).then(
         () => {
+          Tzatziki_Bl.init();
           grunt.log.ok("Test runner config setup complete!");
           return done(true);
         },

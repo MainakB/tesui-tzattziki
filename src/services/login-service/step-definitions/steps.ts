@@ -8,17 +8,17 @@ import LoginPage from "../login.page";
 // };
 
 Given(
-  /^I am on the (\w+) page "(.*)"$/,
+  /^I am on the (\w+) page abc"(.*)"$/,
   async (_page: string, path: string) => {
     await LoginPage.open(path);
   }
 );
 
-When(/^I login with (\w+) and (.+)$/, async (username, password) => {
+When(/^I login wuith (\w+) and (.+) efg$/, async (username, password) => {
   await LoginPage.login(username, password);
 });
 
-Then(/^I should see a flash message saying (.*)$/, async (_message) => {
+Then(/^I should nit see a flash message saying (.*)$/, async (_message) => {
   // await expect(SecurePage.flashAlert).toBeExisting();
   // await expect(SecurePage.flashAlert).toHaveTextContaining(message);
 });
