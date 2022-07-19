@@ -1,24 +1,24 @@
-"use strict";
+'use strict';
 
-const fs = require("fs");
-const path = require("path");
-const { Tzatziki } = require("@kaniamb/tzatziki-core");
-const { Tzatziki_Bl } = require("@kaniamb/tzatziki-bl");
+const fs = require('fs');
+const path = require('path');
+const {Tzatziki} = require('@kaniamb/tzatziki-core');
+const {Tzatziki_Bl} = require('@kaniamb/tzatziki-bl');
 
 module.exports = function (grunt) {
-  require("jit-grunt")(grunt, {
-    shell: "grunt-shell-spawn",
-    continue: "grunt-continue",
+  require('jit-grunt')(grunt, {
+    shell: 'grunt-shell-spawn',
+    continue: 'grunt-continue',
   });
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: grunt.file.readJSON('package.json'),
     shell: shellConfig(grunt),
   });
 
-  grunt.registerTask("pretest", [
-    "shell:compile",
-    "task:setupConfigs",
+  grunt.registerTask('pretest', [
+    'shell:compile',
+    'task:setupConfigs',
     // "shell:compile",
     // "task_setUp:updateProxyForRallyIntegration",
     // "task_setUp:updateTestHelper",
@@ -33,12 +33,12 @@ module.exports = function (grunt) {
     // "task_setUp:setNetThrottle",
   ]);
 
-  grunt.registerTask("test", [
-    "pretest",
-    "continue:on",
-    "task:startTest",
-    "shell:clean_build",
-    "continue:fail-on-warning",
+  grunt.registerTask('test', [
+    'pretest',
+    'continue:on',
+    'task:startTest',
+    'shell:clean_build',
+    'continue:fail-on-warning',
     // "task_merge_jsons",
     // // 'concat',
     // "task_merge_logs",
@@ -47,15 +47,15 @@ module.exports = function (grunt) {
     // "continue:fail-on-warning",
   ]);
 
-  grunt.registerTask("task:setupConfigs", "Run tests", function () {
+  grunt.registerTask('task:setupConfigs', 'Run tests', function () {
     try {
       var done = this.async();
       return Tzatziki.TestRunner.initConfigs({
-        gruntobj: { ...grunt },
+        gruntobj: {...grunt},
       }).then(
         () => {
           Tzatziki_Bl.init();
-          grunt.log.ok("Test runner config setup complete!");
+          grunt.log.ok('Test runner config setup complete!');
           return done(true);
         },
         function (error) {
@@ -65,17 +65,17 @@ module.exports = function (grunt) {
       );
     } catch (err) {
       throw err;
-      grunt.verbose.or.write("Doing something").error().error(err.message);
+      grunt.verbose.or.write('Doing something').error().error(err.message);
     }
   });
 
-  grunt.registerTask("task:startTest", "Start test run", function () {
+  grunt.registerTask('task:startTest', 'Start test run', function () {
     try {
       var done = this.async();
       console.log(`Tset run startxs`);
       return Tzatziki.TestRunner.runTest().then(
         function (code) {
-          console.log(`Tset run done`);
+          console.log(`Tset run done - ${code}`);
           grunt.log.debug(`wdio testrunner finished with exit code ${code}`);
           return done(code === 0);
         },
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
         }
       );
     } catch (err) {
-      grunt.verbose.or.write("Doing something").error().error(err.message);
+      grunt.verbose.or.write('Doing something').error().error(err.message);
     }
   });
 };
@@ -98,10 +98,10 @@ function shellConfig(grunt) {
       failOnError: true,
     },
     compile: {
-      command: "npm run compile",
+      command: 'npm run compile',
     },
     clean_build: {
-      command: "npm run clean:build",
+      command: 'npm run clean:build',
     },
   };
 }
