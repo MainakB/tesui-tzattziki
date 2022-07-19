@@ -120,7 +120,7 @@ def always(currentBuild, platform, gitBranch, buildUrl) {
 }
 
 def reportResults() {
-    // System.setProperty('hudson.model.DirectoryBrowserSupport.CSP', '')
+    System.setProperty('hudson.model.DirectoryBrowserSupport.CSP', '')
     publishHTML (target: [
        allowMissing: false,
        alwaysLinkToLastBuild: false,
