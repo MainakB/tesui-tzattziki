@@ -145,6 +145,7 @@ def cleanWorkspace() {
 def setupWrapper() {
     cleanCheckout()
     npmInstall()
+    setBuildDesc()
 }
 
 def postTestSuccessWrapper() {
