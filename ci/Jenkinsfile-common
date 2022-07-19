@@ -162,19 +162,11 @@ def postTestFailureWrapper() {
 }
 
 def testStageWrapper() {
-    def exceptionThrown = false
     try {
         test(env)
      } catch (err) {
-        exceptionThrown = true
-        if (env.stageRetryCounter && (env.stageRetryCounter as Integer) > 0) {
-            retry(env.stageRetryCounter as Integer) {
-                test(env)
-            }
-         } else {
-            echo "Error thrown ${err}"
-            throw err
-        }
+        echo "Error thrown ${err}"
+        throw err
     }
 }
 return this
