@@ -126,7 +126,7 @@ def reportResults() {
        alwaysLinkToLastBuild: false,
        keepAll: true,
        reportDir: 'Reports/report',
-       reportFiles: 'index2.html',
+       reportFiles: 'index.html',
        reportName: 'Cucumber Report'
      ])
 }
