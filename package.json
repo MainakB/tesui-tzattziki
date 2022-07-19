@@ -4,8 +4,7 @@
   "private": true,
   "devDependencies": {
     "@kaniamb/tzatziki-bl": "^0.1.2",
-    "@kaniamb/tzatziki-core": "^1.0.0",
-    "@wdio/shared-store-service": "7.20.7",
+    "@kaniamb/tzatziki-core": "^1.1.1",
     "grunt-shell-spawn": "0.4.0",
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",

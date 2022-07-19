@@ -1,24 +1,28 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import {Given, Then} from '@cucumber/cucumber';
+import {Tzatziki} from '@kaniamb/tzatziki-core';
 
-import LoginPage from "../pages/login.page";
-// import SecurePage from "../../../sevices/secure-service/secure.page";
+import NavigatePage from '../pages/navigate.page';
 
-// const pages = {
-//   login: LoginPage,
-// };
-
-Given(
-  /^I am on the (\w+) page "(.*)"$/,
-  async (_page: string, path: string) => {
-    await LoginPage.open(path);
-  }
-);
-
-When(/^I login with (\w+) and (.+)$/, async (username, password) => {
-  await LoginPage.login(username, password);
+Given(/^I navigate to "(.*)"$/, async (path: string) => {
+  await NavigatePage.open(path);
 });
 
-Then(/^I should see a flash message saying (.*)$/, async (_message) => {
-  // await expect(SecurePage.flashAlert).toBeExisting();
-  // await expect(SecurePage.flashAlert).toHaveTextContaining(message);
+Then(/^I search for "(.*)"$/, async (searchText: string) => {
+  await Tzatziki.Action.enterText({
+    pageObject: "//input[@title='Search']",
+    inputText: searchText,
+    clickBeforeTextInput: true,
+    clickAfterTextInput: true,
+  });
+});
+
+Then(/^I click on options$/, async () => {
+  await Tzatziki.Action.click({
+    pageObject: [
+      "//a[normalize-space()='News']",
+      "//a[normalize-space()='Images']",
+      "//a[normalize-space()='All']",
+      "//a[normalize-space()='Terms']",
+    ],
+  });
 });

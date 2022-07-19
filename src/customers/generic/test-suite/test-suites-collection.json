@@ -1,4 +1,4 @@
 {
-  "regression": [["features/login.feature", "features/login-new.feature"]],
+  "regression": [["features/login.feature", "features/search-google.feature"]],
   "deploy": ["features/login-deploy.feature"]
 }

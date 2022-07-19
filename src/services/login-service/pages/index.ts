@@ -1,2 +1,2 @@
-export * from './login.page';
-export * from './navigate';
+export * from './navigate.page';
+export * from './page';
