@@ -1,7 +1,6 @@
 ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
 
 def setBuildDesc(currentBuild, platform, gitBranch) {
-    def op_system = env.operating_system != null && env.operating_system != '' ? env.operating_system.toLowerCase() : 'linux'
     def platformValue = platform ? platform : 'Multi Tenant'
     if (gitBranch.contains('/')) {
         currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch.split('/')[1]},\nOS -> ${op_system}"
@@ -145,7 +144,7 @@ def cleanWorkspace() {
 def setupWrapper() {
     cleanCheckout()
     npmInstall()
-    setBuildDesc()
+    setBuildDesc(currentBuild, env.platform, GIT_BRANCH)
 }
 
 def postTestSuccessWrapper() {
