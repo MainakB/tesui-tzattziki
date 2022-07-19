@@ -37,6 +37,7 @@ module.exports = function (grunt) {
     'pretest',
     'continue:on',
     'task:startTest',
+    'continue:off',
     'shell:clean_build',
     'continue:fail-on-warning',
     // "task_merge_jsons",

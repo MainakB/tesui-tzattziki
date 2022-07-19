@@ -62,13 +62,17 @@ pipeline {
                             common.testStageWrapper()
                         }
                     }
+                    post {
+                        success { script { common.postTestSuccessWrapper() } }
+                        failure { script { common.postTestFailureWrapper() } }
+                        always { script { common.always(currentBuild, env.platform, GIT_BRANCH, env.BUILD_URL) } }
+                    }
                 }
             }
         }
     }
+
     post {
-        success { script { common.postTestSuccessWrapper() } }
-        failure { script { common.postTestFailureWrapper() } }
-        always { script { common.always(currentBuild, env.platform, GIT_BRANCH, env.BUILD_URL) } }
+        always { script { echo 'Test complete!' } }
     }
 }
