@@ -3,9 +3,9 @@ ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
 def setBuildDesc(currentBuild, platform, gitBranch) {
     def platformValue = platform ? platform : 'Multi Tenant'
     if (gitBranch.contains('/')) {
-        currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch.split('/')[1]},\nOS -> ${op_system}"
+        currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch.split('/')[1]}"
      } else {
-        currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch},\nOS -> ${op_system}"
+        currentBuild.description = "Tenant -> ${platformValue},\nBranch -> ${gitBranch}"
     }
 }
 
