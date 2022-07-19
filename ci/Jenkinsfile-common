@@ -114,6 +114,7 @@ def notifyFailure(emailFailure) {
   *  post: always
   */
 def always(currentBuild, platform, gitBranch, buildUrl) {
+    sh 'node node_modules/@kaniamb/tzatziki-core/dist/src/services/CdnFileMerger.js'
     reportResults()
     archiveLogs()
 }
