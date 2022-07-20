@@ -9,7 +9,7 @@ def updateBuildCompletionStatus(platform, gitBranchParam) {
          "api_url": "${env.BUILD_URL}",
          "tenant_name": "${platform}",
          "browser_name": "${env.browser}",
-         "team":"${env.browser}",
+         "team":"${env.team}",
          "type": "UI"
      }"""
 
