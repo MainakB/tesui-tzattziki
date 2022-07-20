@@ -1,26 +1,5 @@
 ATTACHMENTS_PATTERNS = 'Reports/report/index2.html'
 
-def updateBuildCompletionStatus(platform, gitBranchParam) {
-    def whiteSourceURL = 'http://host.docker.internal:5001/api/jobs/complete/'
-    def gitBranch = gitBranchParam.contains('/') ? gitBranchParam.split('/')[1] : gitBranchParam
-
-    def body="""
-     {
-         "api_url": "${env.BUILD_URL}",
-         "tenant_name": "${platform}",
-         "browser_name": "${env.browser}",
-         "team":"${env.team}",
-         "type": "UI"
-     }"""
-
-    def response = httpRequest contentType: 'APPLICATION_JSON',
-                     acceptType: 'APPLICATION_JSON',
-                     httpMode: 'POST',
-                     requestBody: body,
-                     responseHandle: 'LEAVE_OPEN',
-                     url: whiteSourceURL
-}
-
 def setBuildDesc(currentBuild, platform, gitBranch, browser) {
     def platformValue = platform ? platform : 'Multi Tenant'
     if (gitBranch.contains('/')) {
@@ -135,12 +114,6 @@ def notifyFailure(emailFailure) {
   *  post: always
   */
 def always(currentBuild, platform, gitBranch, buildUrl) {
-    try {
-        updateBuildCompletionStatus(platform, gitBranch)
-         } catch (err) {
-        echo "Exception thrown in always block.Exception - ${err}"
-    }
-
     sh 'node node_modules/@kaniamb/tzatziki-core/dist/src/services/CdnFileMerger.js'
     reportResults()
     archiveLogs()
