@@ -99,7 +99,7 @@ function shellConfig(grunt) {
       failOnError: true,
     },
     compile: {
-      command: 'npm run compile',
+      command: 'node -v && npm -v',
     },
     clean_build: {
       command: 'npm run clean:build',
