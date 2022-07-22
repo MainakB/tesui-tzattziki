@@ -13,9 +13,9 @@
     "typescript": "4.7.4"
   },
   "scripts": {
-    "compile": "run-s node -v",
+    "compile": "run-s cleanbuild",
     "clean:pretest": "run-p clean:build clean:reports clean:videos",
-    "clean:build": "rimraf dist",
+    "cleanbuild": "rimraf dist",
     "clean:reports": "rimraf Reports",
     "clean:videos": "rimraf _results_",
     "compile:all": "tsc --diagnostics",
