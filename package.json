@@ -13,7 +13,7 @@
     "typescript": "4.7.4"
   },
   "scripts": {
-    "compile": "run-s cleanbuild",
+    "compile": "npm-run-all --pasrallel cleanbuild",
     "clean:pretest": "run-p clean:build clean:reports clean:videos",
     "cleanbuild": "rimraf dist",
     "clean:reports": "rimraf Reports",
