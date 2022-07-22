@@ -6,3 +6,5 @@ Reports
 _results_
 .vscode
 .DS_Store
+package-lock.json
+package-copy.json
