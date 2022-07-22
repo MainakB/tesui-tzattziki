@@ -14,7 +14,7 @@
   },
   "scripts": {
     "nrp": "node_modules/npm-run-all/bin/run-p",
-    "compile": "nrp clean:build",
+    "compile": "node -v",
     "clean:pretest": "run-p clean:build clean:reports clean:videos",
     "clean:build": "rimraf dist",
     "clean:reports": "rimraf Reports",
