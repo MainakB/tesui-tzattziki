@@ -32,7 +32,7 @@ def npmConfig() {
 }
 
 def npmInstallGlobals() {
-    sh 'npm install grunt-cli typescript@latest --location=global'
+    sh 'npm install grunt-cli typescript@latest npm-run-all --location=global'
 }
 
 def npmInstallLocals() {

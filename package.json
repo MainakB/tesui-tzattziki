@@ -7,13 +7,12 @@
     "@kaniamb/tzatziki-core": "^1.1.1",
     "grunt-continue": "^0.1.0",
     "grunt-shell-spawn": "0.4.0",
-    "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
     "typescript": "4.7.4"
   },
   "scripts": {
-    "compile": "rimraf dist",
+    "compile": "run-p clean:build",
     "clean:pretest": "run-p clean:build clean:reports clean:videos",
     "clean:build": "rimraf dist",
     "clean:reports": "rimraf Reports",
